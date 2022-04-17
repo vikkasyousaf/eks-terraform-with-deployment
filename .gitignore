@@ -1,0 +1,10 @@
+# Exclude any temporary terraform files
+.terraform
+terraform.tfvars
+
+# Exclude all local Terraform states
+terraform.tfstate
+terraform.tfstate.backup
+
+# Exclude the providers lock file introduced by TF0.14
+.terraform.lock.hcl
