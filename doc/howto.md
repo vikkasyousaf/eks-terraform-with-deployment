@@ -1,4 +1,4 @@
-### Solution
+### Description
 I have choose to create aws eks as it easy to operate and manage the cluster and worker nodes. AWS manages the servers for us. and we just have to specify some configurations of server instance types. For the given challenge i have create eks cluster using terraform version `1.1`.
 
 ### EKS Cluster Setup
@@ -13,7 +13,7 @@ For the give challenge i have create the following Resources:
 * I have also create `service.tf` which is using LoadBalancer. This will allow us to access the application externally
 
 ## How to rollout
-For this challenge we are using terraform version `1.1`.
+For this project we are using terraform version `1.1`.
 
 ### Testing Instructions
 ```
