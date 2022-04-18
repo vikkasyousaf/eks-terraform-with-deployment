@@ -1,16 +1,6 @@
 ### Solution
 I have choose to create aws eks as it easy to operate and manage the cluster and worker nodes. AWS manages the servers for us. and we just have to specify some configurations of server instance types. For the given challenge i have create eks cluster using terraform version `1.1`.
 
-
-#### Why EKS
-
-#### Self-managed:
-You bring your own servers and have more control of the server. You have to manage it yourself though. So people also call this unmanaged.
-#### Managed Node Groups:
-AWS manages the servers for you. You just have to specify some configurations of server instance types.
-#### AWS Fargate:
-AWS manages even more of the server for you. You don't even have to think about instance types. Just tell EKS how much RAM and CPU you need and that's it.
-
 ### EKS Cluster Setup
 For the give challenge i have create the following Resources:
 * VPC with two private subnets as it is more secure to run the application in private nodes.
@@ -42,32 +32,29 @@ aws eks update-kubeconfig --name terraform-eks-demo --region eu-central-1
 ```
 If you have multiple context, then you can use the following command to switch to the correct contex
 ```
-kubectl config use-context arn:aws:eks:eu-central-1:136772758500:cluster/getting-started-eks
+kubectl config use-context arn:aws:eks:eu-central-1:136772758500:cluster/terraform-eks-demo
 ```
 ```
 kubectl get nodes
-NAME                                         STATUS   ROLES    AGE    VERSION
-ip-10-0-1-41.eu-central-1.compute.internal   Ready    <none>   114s   v1.21.5-eks-9017834
+NAME                                         STATUS   ROLES    AGE     VERSION
+ip-10-0-1-85.eu-central-1.compute.internal   Ready    <none>   7m46s   v1.21.5-eks-9017834
 ```
 ```
 kubectl get ns
 NAME              STATUS   AGE
-default           Active   4d1h
-kube-node-lease   Active   4d1h
-kube-public       Active   4d1h
-kube-system       Active   4d1h
+default           Active   16m
+kube-node-lease   Active   16m
+kube-public       Active   16m
+kube-system       Active   16m
 ```
 ```
 kubectl get pods -n default
-NAME                      READY   STATUS    RESTARTS   AGE
-coffee-55bf956c8d-knbwr   1/1     Running   0          4d1h
-coffee-55bf956c8d-kz5vs   1/1     Running   0          4d1h
-tea-84d7c495b4-4mxp6      1/1     Running   0          4d1h
-tea-84d7c495b4-6nql7      1/1     Running   0          4d1h
-tea-84d7c495b4-vkxt4      1/1     Running   0          4d1h
+NAME                         READY   STATUS    RESTARTS   AGE
+terraform-868899bf59-dkr9q   1/1     Running   0          10m
+terraform-868899bf59-lbrk4   1/1     Running   0          10m
 ```
 ```
-kubectl logs -f coffee-55bf956c8d-knbwr  -n default
+kubectl logs -f terraform-868899bf59-dkr9q  -n default
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -75,14 +62,14 @@ kubectl logs -f coffee-55bf956c8d-knbwr  -n default
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 /docker-entrypoint.sh: Configuration complete; ready for start up
-2022/04/12 10:19:05 [notice] 1#1: using the "epoll" event method
-2022/04/12 10:19:05 [notice] 1#1: nginx/1.21.6
-2022/04/12 10:19:05 [notice] 1#1: built by gcc 10.3.1 20211027 (Alpine 10.3.1_git20211027)
-2022/04/12 10:19:05 [notice] 1#1: OS: Linux 5.4.181-99.354.amzn2.x86_64
-2022/04/12 10:19:05 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
-2022/04/12 10:19:05 [notice] 1#1: start worker processes
-2022/04/12 10:19:05 [notice] 1#1: start worker process 22
-2022/04/12 10:19:05 [notice] 1#1: start worker process 23
+2022/04/17 09:42:45 [notice] 1#1: using the "epoll" event method
+2022/04/17 09:42:45 [notice] 1#1: nginx/1.21.6
+2022/04/17 09:42:45 [notice] 1#1: built by gcc 10.3.1 20211027 (Alpine 10.3.1_git20211027)
+2022/04/17 09:42:45 [notice] 1#1: OS: Linux 5.4.181-99.354.amzn2.x86_64
+2022/04/17 09:42:45 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2022/04/17 09:42:45 [notice] 1#1: start worker processes
+2022/04/17 09:42:45 [notice] 1#1: start worker process 22
+10.0.1.85 - - [17/Apr/2022:09:50:33 +0000] "GET / HTTP/1.0" 200 7232 "-" "-" "-"
 ```
 ### TODO
 This is a very basic eks cluster. In order to make it production ready cluster, we will need to make the following adjustments:
@@ -97,6 +84,7 @@ This is a very basic eks cluster. In order to make it production ready cluster, 
 * Should have dedicated IAM User or role to run terraform apply
 * Integrate atlantis to the respository so that the terraform plan and apply are automated.
 * Configure dynamodb for the version control of terraform state
+* Create a pipeline to push the terraform state file to s3 bucket
 
 ### Monitoring
 * The module allow us to enable logging so that the logs are available on cloudwatch.
