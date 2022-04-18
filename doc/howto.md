@@ -32,7 +32,7 @@ aws eks update-kubeconfig --name terraform-eks-demo --region eu-central-1
 ```
 If you have multiple context, then you can use the following command to switch to the correct contex
 ```
-kubectl config use-context arn:aws:eks:eu-central-1:136772758500:cluster/terraform-eks-demo
+kubectl config use-context arn:aws:eks:eu-central-1:<account_id>:cluster/terraform-eks-demo
 ```
 ```
 kubectl get nodes
