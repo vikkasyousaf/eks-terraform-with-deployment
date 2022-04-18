@@ -1,5 +1,6 @@
 ### Solution
-I have choose to create aws eks as it easy to operate and manage the cluster and worker nodes. For the given challenge i have create eks cluster using terraform version `1.1`.
+I have choose to create aws eks as it easy to operate and manage the cluster and worker nodes. AWS manages the servers for us. and we just have to specify some configurations of server instance types. For the given challenge i have create eks cluster using terraform version `1.1`.
+
 
 #### Why EKS
 
