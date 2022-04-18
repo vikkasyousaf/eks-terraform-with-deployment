@@ -14,7 +14,7 @@ For the give project i have create the following Resources:
 
 ## How to rollout
 For this project we are using terraform version `1.1`.
-
+Before running the project make sure to add `account_id` of you aws account in `variable.tf` and the iam user in `map_users`.
 ### Testing Instructions
 ```
 terraform init
