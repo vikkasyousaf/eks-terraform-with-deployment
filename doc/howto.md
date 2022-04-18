@@ -1,8 +1,8 @@
 ### Description
-I have choose to create aws eks as it easy to operate and manage the cluster and worker nodes. AWS manages the servers for us. and we just have to specify some configurations of server instance types. For the given challenge i have create eks cluster using terraform version `1.1`.
+I have choose to create aws eks as it easy to operate and manage the cluster and worker nodes. AWS manages the servers for us. and we just have to specify some configurations of server instance types. For the given project i have create eks cluster using terraform version `1.1`.
 
 ### EKS Cluster Setup
-For the give challenge i have create the following Resources:
+For the give project i have create the following Resources:
 * VPC with two private subnets as it is more secure to run the application in private nodes.
 * Internet gateways so that the application are able to run on http and https
 * Create respective routing table and its association
