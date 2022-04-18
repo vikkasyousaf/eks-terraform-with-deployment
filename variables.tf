@@ -12,7 +12,7 @@ variable "map_accounts" {
   type        = list(string)
 
   default = [
-    "136772758500",
+    "<account_id>",
   ]
 }
 
@@ -26,7 +26,7 @@ variable "map_users" {
 
   default = [
     {
-      userarn  = "arn:aws:iam::136772758500:user/terraform-user"
+      userarn  = "arn:aws:iam::<account_id>:user/terraform-user"
       username = "terraform-user"
       groups   = ["system:masters"]
     },
