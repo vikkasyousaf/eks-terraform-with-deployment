@@ -1,5 +1,5 @@
 ### EKS Cluster Demo
-This project will create an eks cluster and will deployment a simple web application. For more details refer to this [doc](https://github.com/vikkasyousaf/eks-terraform-with-deployment/blob/master/doc/howto.md).
+This project will create an eks cluster and will deployment a simple web application. For more details refer to this [doc](https://github.com/vikkasyousaf/eks-terraform-with-deployment/blob/master/doc/how-to.md).
 ## Requirements
 
 | Name | Version |
